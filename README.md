@@ -1,3 +1,2 @@
-# AdvancedNodeStarter
-Starting project on Advanced NodeJS
+# MY NOTE APP(MERN) WITH AUTOMATED TESTING
 
