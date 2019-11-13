@@ -6,22 +6,22 @@ const keys = require('../config/keys');
 const User = mongoose.model('User');
 
 const fun = async () => {
+  console.log('-->fun() called');
+
   const data = await new User({ googleId: 'anshika', displayName: 'anshika' })
-  console.log("--------------------------------------------------");
-  console.log("data=", data);
+  console.log('before save:', data)
   data.save()
     .then(doc => {
-      console.log(doc)
+      console.log('after save:', doc)
     })
     .catch(err => {
-      console.log(err)
+      console.log('error after save:', err)
     });
   // const user = await User.findById('5d32b3a01c9d440000c09c8e');
   // console.log("user=", user);
-  console.log("--------------------------------------------------");
 
 }
-//fun();
+// fun();
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -38,34 +38,29 @@ passport.use(
     {
       callbackURL: '/auth/callback',
       clientID: keys.googleClientID,
-      clientSecret: keys.googleClientSecret
+      clientSecret: keys.googleClientSecret,
+      proxy: true
     },
-    (accessToken, refreshToken, profile, done) => {
-      console.log("profile here", profile);
-      User.findOne({ googleId: profile.id })
-        .then((existing) => {
-          if (existing) {
-            //user existing
-            done(null, existing);
-          }
-          else {
-            //user doesnt exists..
-            new User({
-              googleId: profile.id,
-              displayName: profile.displayName
-            })
-              .save()
-              .then((user) => {
-                console.log("done dina done=", user);
-                done(null, user);
-              })
-              .catch(err => {
-                console.log("error is here in catch", err)
-              });
-          }
-        })
-
-
-    }
-  )
-);
+    async (accessToken, refreshToken, profile, done) => {
+      console.log("profile here:", profile._json.email);
+      const response = await User.findOne({ googleId: profile.id });
+      if (response) {
+        console.log('user existing')
+        done(null, response);
+      } else {
+        console.log('user does not exist');
+        const data = await new User({
+          googleId: profile.id,
+          displayName: profile.displayName,
+          email: profile._json.email
+        });
+        data.save()
+          .then(doc => {
+            console.log('after save:', doc)
+            done(null, doc);
+          })
+          .catch(err => {
+            console.log(err)
+          });
+      }
+    }));

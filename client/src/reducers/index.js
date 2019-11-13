@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import { reducer as reduxForm } from 'redux-form';
 import authReducer from './authReducer';
-import blogsReducer from './blogsReducer';
+import notesFolderReducer from './notesFolderReducer';
+import notesReducer from './notesReducer';
 
 export default combineReducers({
   auth: authReducer,
   form: reduxForm,
-  blogs: blogsReducer
+  folders: notesFolderReducer,
+  notes: notesReducer
 });

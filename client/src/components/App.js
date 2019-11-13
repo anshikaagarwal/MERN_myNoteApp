@@ -8,7 +8,7 @@ import Landing from './Landing';
 import Dashboard from './Dashboard';
 import BlogNew from './blogs/BlogNew';
 import BlogShow from './blogs/BlogShow';
-import Blogster from './Blogster';
+import NoteFolderList from './blogs/NoteFolderList';
 
 class App extends Component {
   componentDidMount() {
@@ -22,11 +22,12 @@ class App extends Component {
           <div>
             <Header />
             <Switch>
-              <Route path="/blogs/new" component={BlogNew} />
+              <Route path="/blogs/new/*" component={BlogNew} />
               <Route exact path="/blogs/:_id" component={BlogShow} />
               <Route path="/blogs" component={Dashboard} />
-              <Route path="/blogster" component={Blogster} />
-              <Route path="/" component={Landing} />
+              <Route path="/folder_list" component={NoteFolderList} />
+              <Route exact path="/" component={Landing} />
+              <Route path="/notes/*" component={Dashboard} />
             </Switch>
           </div>
         </BrowserRouter>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 class Header extends Component {
   renderContent() {
+    console.log('user account:', this.props.auth)
     switch (this.props.auth) {
       case null:
         return;
@@ -16,7 +17,7 @@ class Header extends Component {
       default:
         return [
           <li key="3" style={{ margin: '0 10px' }}>
-            <Link to="/blogs">My Blogs</Link>
+            <Link to="/folder_list">My Notes</Link>
           </li>,
           <li key="2">
             <a href={'/auth/logout'}>Logout</a>
@@ -27,14 +28,14 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="indigo">
+      <nav className="blue darken-4">
         <div className="nav-wrapper">
           <Link
             to={this.props.auth ? '/blogs' : '/'}
             className="left brand-logo"
             style={{ marginLeft: '10px' }}
           >
-            Blogster
+            MyNoteApp
           </Link>
           <ul className="right">{this.renderContent()}</ul>
         </div>

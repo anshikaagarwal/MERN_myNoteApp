@@ -8,6 +8,7 @@ module.exports = app => {
     { scope: ['profile', 'email'] }
   ));
   app.get('/auth/callback', passport.authenticate('google'), (req, res) => {
+    console.log('callback called');
     res.redirect("/blogs");
   });
 
