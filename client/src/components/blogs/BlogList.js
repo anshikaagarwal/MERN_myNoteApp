@@ -44,7 +44,7 @@ class BlogList extends Component {
       });
     } else {
       return <div style={{ textAlign: 'center', marginTop: '20px' }}>
-        <h4>Empty Here!!!</h4>
+        <h4>No Notes Here!!!</h4>
       </div>;
     }
   }
