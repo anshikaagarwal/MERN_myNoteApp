@@ -12,7 +12,7 @@ afterEach(async () => {
 
 test("testing text present in header", async () => {
     const text = await page.$eval('a.brand-logo', (el) => el.innerHTML);
-    expect(text).toEqual('Blogster');
+    expect(text).toEqual('MyNoteApp');
 });
 
 test("testing OAuth flow while clicking login", async () => {
@@ -31,9 +31,4 @@ test("shows logout after logged in", async () => {
     console.log("text=", text);
 
 });
-
-
-//C:\Users\dell\AppData\Local\Programs\Python\Python37-32
-//C:\Users\dell\AppData\Local\Programs\Python\Python37
-
 
