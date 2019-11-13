@@ -24,7 +24,7 @@ module.exports.getNotes = async (email, f_name) => {
 
 // add new note in a folder
 module.exports.appendNotes = async (email, note, f_name, username, time) => {
-    data = {
+    data_obj = {
         title: note.title,
         editor_name: username,
         content: note.content,
@@ -34,8 +34,8 @@ module.exports.appendNotes = async (email, note, f_name, username, time) => {
     if (!res) {
         res = await Folder.addNewFolder(email, f_name);
     }
-    res.notes.push(data);
-    return await res.save()
+    res.notes.push(data_obj);
+    return res.save()
         .then(doc => {
             // console.log('new note created:', doc)
             return doc;

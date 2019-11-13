@@ -78,7 +78,7 @@ export const share_note = (emails, note) => async dispatch => {
   console.log("wrong email id's:", res.data);
   let str = "";
   for (let i = 0; i < res.data.length; i++) {
-    str = str + ' , ' + res.data[i];
+    str = str + res.data[i] + ',';
   }
   alert("Wrong Email ID's: " + str);
 }
